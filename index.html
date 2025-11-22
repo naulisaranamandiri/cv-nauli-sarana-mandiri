@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
+        /* Gaya Fade-in Awal */
         body { font-family: Arial, sans-serif; opacity: 0; transition: opacity 0.5s ease-in-out; }
         .hero {
             padding: 70px 0;
@@ -23,6 +24,18 @@
         }
         .section-title { font-weight: 700; margin-bottom: 20px; }
         footer { font-size: 14px; }
+        
+        /* Gaya untuk Efek Scroll Reveal */
+        .reveal {
+            position: relative;
+            transform: translateY(50px); /* Mulai dari 50px di bawah */
+            opacity: 0;
+            transition: all 0.6s ease-out; /* Durasi transisi */
+        }
+        .reveal.active {
+            transform: translateY(0); /* Kembali ke posisi normal */
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -34,7 +47,7 @@
     <p class="text-secondary">Pengadaan ATK, Teknologi, & Jasa Konstruksi</p>
 </header>
 
-<section class="container py-5">
+<section class="container py-5 reveal">
     <h3 class="section-title">Tentang Kami</h3>
     <div class="card shadow-sm border-0">
         <div class="card-body">
@@ -47,7 +60,7 @@
     </div>
 </section>
 
-<section class="container py-3">
+<section class="container py-3 reveal">
     <h3 class="section-title">Bidang Usaha Kami</h3>
 
     <div class="row g-3">
@@ -88,9 +101,7 @@
     </div>
 </section>
 
-</div>
-</section> 
-<section class="container py-5 bg-light"> 
+<section class="container py-5 bg-light reveal">
     <h3 class="section-title text-center">Toko Resmi Kami</h3>
     
     <div class="row justify-content-center">
@@ -111,10 +122,8 @@
         </div>
     </div>
 </section>
-<section class="container py-5">
-    <h3 class="section-title">Visi & Misi</h3>
-    
-<section class="container py-5">
+
+<section class="container py-5 reveal">
     <h3 class="section-title">Visi & Misi</h3>
 
     <div class="card shadow-sm border-0">
@@ -131,7 +140,7 @@
     </div>
 </section>
 
-<section class="container py-5" id="contact">
+<section class="container py-5 reveal" id="contact">
     <h3 class="section-title">Kontak Perusahaan</h3>
 
     <div class="card shadow-sm border-0">
@@ -154,23 +163,45 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        // Skrip ini membuat body halaman perlahan muncul (fade-in)
-        // Setelah semua konten (termasuk gambar) dimuat.
+    // FUNGSI UTAMA UNTUK MENAMBAH DINAMIKA (Scroll Reveal)
+    function revealElements() {
+        const reveals = document.querySelectorAll(".reveal");
+        
+        // Loop melalui setiap elemen yang memiliki class 'reveal'
+        for (let i = 0; i < reveals.length; i++) {
+            const windowHeight = window.innerHeight;
+            // Ambil jarak elemen dari bagian atas viewport
+            const revealTop = reveals[i].getBoundingClientRect().top;
+            
+            // Tentukan titik trigger (misalnya, 150px dari bawah viewport)
+            const revealPoint = 150;
+
+            // Jika elemen masuk ke dalam area pandang
+            if (revealTop < windowHeight - revealPoint) {
+                // Tambahkan class 'active' untuk memicu transisi CSS
+                reveals[i].classList.add("active");
+            } 
+            // Opsional: Untuk menghilangkan efek saat di-scroll ke atas lagi
+            /*
+            else {
+                reveals[i].classList.remove("active");
+            }
+            */
+        }
+    }
+
+    // Panggil fungsi saat DOM dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Fade-in Halaman Penuh
         document.body.style.opacity = 1;
         
-        // Contoh lain: Menangani klik tombol WhatsApp (meskipun tidak wajib karena sudah ada 'href')
-        const waButton = document.querySelector('.btn-success');
-        if (waButton) {
-            waButton.addEventListener('click', (e) => {
-                console.log('Mengalihkan ke WhatsApp...');
-                // Tindakan tambahan bisa ditambahkan di sini, misalnya logging analytics.
-            });
-        }
+        // 2. Panggil fungsi reveal saat DOM siap (untuk elemen yang sudah terlihat)
+        revealElements(); 
     });
+
+    // Panggil fungsi reveal setiap kali pengguna melakukan scroll
+    window.addEventListener("scroll", revealElements);
 </script>
 
 </body>
 </html>
-
-
