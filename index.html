@@ -5,95 +5,346 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV Nauli Sarana Mandiri</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* Gaya Fade-in Awal */
-        body { font-family: Arial, sans-serif; opacity: 0; transition: opacity 0.5s ease-in-out; }
-        .hero {
-            padding: 70px 0;
-            background: linear-gradient(135deg, #e8eef3, #ffffff);
+        /* Variabel Warna */
+        :root {
+            --primary-color: #007bff; /* Biru Primer yang Kuat */
+            --secondary-color: #6c757d; /* Abu-abu Sekunder */
+            --accent-color: #28a745; /* Hijau Aksen untuk Success/WhatsApp */
+            --light-bg: #f8f9fa; /* Latar Belakang Terang */
+            --dark-text: #343a40; /* Teks Gelap */
+            --light-text: #ffffff; /* Teks Terang */
+            --gradient-start: #e9ecef; /* Gradien Hero Lebih Halus */
+            --gradient-end: #ffffff;
         }
-        .logo { max-width: 180px; }
-        .card-img-top {
-            height: 130px;
-            object-fit: cover;
-            object-position: center;
+
+        /* Gaya Dasar & Tipografi */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark-text);
+            opacity: 0; /* Untuk fade-in awal */
+            transition: opacity 0.8s ease-in-out;
+            background-color: var(--light-bg);
         }
-        .section-title { font-weight: 700; margin-bottom: 20px; }
-        footer { font-size: 14px; }
-        
-        /* Gaya untuk Efek Scroll Reveal */
-        .reveal {
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark-text);
+        }
+        .fw-bold { font-weight: 700 !important; }
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--primary-color);
             position: relative;
-            transform: translateY(50px); /* Mulai dari 50px di bawah */
-            opacity: 0;
-            transition: all 0.6s ease-out; /* Durasi transisi */
+            display: inline-block;
+            padding-bottom: 8px;
         }
-        .reveal.active {
-            transform: translateY(0); /* Kembali ke posisi normal */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+        .text-primary { color: var(--primary-color) !important; }
+        .text-secondary { color: var(--secondary-color) !important; }
+        .text-success { color: var(--accent-color) !important; }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Sedikit lebih gelap */
+            border-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        .btn-success:hover {
+            background-color: #218838; /* Sedikit lebih gelap */
+            border-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        /* Navbar */
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background-color: var(--light-text);
+        }
+        .navbar-brand img {
+            max-height: 40px;
+        }
+        .nav-link {
+            font-weight: 600;
+            color: var(--dark-text) !important;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 123, 255, 0.05); /* Sedikit aksen di sudut */
+            border-radius: 50%;
+            animation: bubble1 15s infinite ease-in-out;
+            z-index: 0;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -70px;
+            right: -70px;
+            width: 180px;
+            height: 180px;
+            background: rgba(0, 123, 255, 0.08);
+            border-radius: 50%;
+            animation: bubble2 18s infinite ease-in-out;
+            z-index: 0;
+        }
+        @keyframes bubble1 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 30px); }
+            100% { transform: translate(0, 0); }
+        }
+        @keyframes bubble2 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, -20px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+        }
+        .logo {
+            max-width: 200px;
+            border-radius: 15px; /* Sedikit border-radius pada logo */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Card Styles */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        .card-img-top {
+            height: 180px; /* Tinggi gambar lebih proporsional */
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        .card-body {
+            padding: 25px;
+        }
+        .card-body .bi {
+            font-size: 3.5rem; /* Ukuran icon lebih besar */
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover .card-body .bi {
+            transform: scale(1.1);
+        }
+
+        /* SIPLAH Section */
+        .siplah-card {
+            background: linear-gradient(45deg, var(--primary-color), #00aaff); /* Gradien untuk SIPLAH */
+            color: var(--light-text);
+            padding: 40px;
+            border-radius: 15px;
+        }
+        .siplah-card .bi {
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+        .siplah-card .btn-lg {
+            background-color: var(--light-text);
+            color: var(--primary-color);
+            font-weight: 600;
+            border: none;
+        }
+        .siplah-card .btn-lg:hover {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-text);
+            color: var(--light-text);
+            padding: 25px 0;
+            margin-top: 50px;
+            font-size: 0.9em;
+        }
+
+        /* Fade-in & Scroll Reveal (menggunakan AOS) */
+        /* AOS akan menggantikan fungsi reveal JS Anda, jadi kita bisa hapus CSS .reveal asli */
+        body.aos-init.aos-animate {
             opacity: 1;
+        }
+
+        /* Media Queries untuk Responsivitas */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section-title {
+                margin-bottom: 1.5rem;
+            }
+            .card-img-top {
+                height: 150px;
+            }
+            .card-body .bi {
+                font-size: 2.5rem;
+            }
+            .siplah-card {
+                padding: 30px;
+            }
         }
     </style>
 </head>
 
 <body>
 
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="assets/images/logo.png" alt="Logo Nauli Sarana Mandiri">
+            <span class="ms-2 fw-bold text-primary">Nauli Sarana Mandiri</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Tentang Kami</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Bidang Usaha</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#siplah-store">Toko SIPLAH</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#vision-mission">Visi & Misi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Kontak</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <header class="hero text-center">
-    <img src="assets/images/logo.png" class="logo mb-3" alt="Logo CV Nauli Sarana Mandiri">
-    <h1 class="fw-bold">CV Nauli Sarana Mandiri</h1>
-    <p class="text-secondary">Pengadaan ATK, Teknologi, & Jasa Konstruksi</p>
+    <div class="container position-relative" style="z-index: 1;">
+        <img src="assets/images/logo.png" class="logo mb-4" alt="Logo CV Nauli Sarana Mandiri" data-aos="zoom-in" data-aos-duration="1000">
+        <h1 class="fw-bold" data-aos="fade-up" data-aos-delay="300">CV Nauli Sarana Mandiri</h1>
+        <p class="text-secondary" data-aos="fade-up" data-aos-delay="500">Solusi Terpercaya untuk Pengadaan Kantor, Teknologi, & Jasa Konstruksi</p>
+        <a href="#contact" class="btn btn-primary btn-lg mt-4" data-aos="zoom-in" data-aos-delay="700">Hubungi Kami <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
 </header>
 
-<section class="container py-5 reveal">
-    <h3 class="section-title">Tentang Kami</h3>
-    <div class="card shadow-sm border-0">
-        <div class="card-body">
-            <p>
-                CV Nauli Sarana Mandiri adalah perusahaan yang bergerak di bidang pengadaan alat tulis kantor (ATK),
-                perlengkapan komputer & teknologi, serta jasa konstruksi. Kami berkomitmen memberikan produk berkualitas
-                dengan harga kompetitif yang didukung oleh tim profesional.
+<section id="about" class="container py-5">
+    <h3 class="section-title text-center" data-aos="fade-up">Tentang Kami</h3>
+    <div class="card shadow-lg border-0" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-body p-4 p-md-5">
+            <p class="lead text-center mb-0">
+                CV Nauli Sarana Mandiri adalah perusahaan yang berdedikasi tinggi dalam menyediakan
+                layanan **pengadaan alat tulis kantor (ATK), perlengkapan komputer & teknologi**,
+                serta **jasa konstruksi** yang handal. Kami berkomitmen untuk memberikan produk dan
+                layanan berkualitas premium dengan harga yang kompetitif, didukung oleh tim
+                profesional yang siap memenuhi kebutuhan spesifik klien. Dengan fokus pada efisiensi
+                dan kepuasan pelanggan, kami siap menjadi mitra strategis Anda.
             </p>
         </div>
     </div>
 </section>
 
-<section class="container py-3 reveal">
-    <h3 class="section-title">Bidang Usaha Kami</h3>
+<section id="services" class="container py-5 bg-light-gradient">
+    <h3 class="section-title text-center" data-aos="fade-up">Bidang Usaha Kami</h3>
 
-    <div class="row g-3">
+    <div class="row g-4 justify-content-center">
 
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm border-0">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 shadow-sm">
                 <img src="assets/images/atk.png" class="card-img-top" alt="Gambar ATK">
                 <div class="card-body text-center">
-                    <i class="bi bi-pencil-square fs-2"></i>
-                    <h5 class="fw-bold mt-2">Pengadaan ATK</h5>
-                    <p>Penyedia alat tulis kantor & perlengkapan perkantoran.</p>
+                    <i class="bi bi-pencil-square fs-1"></i>
+                    <h5 class="fw-bold mt-3">Pengadaan ATK</h5>
+                    <p class="text-muted">Penyedia lengkap alat tulis kantor dan perlengkapan perkantoran esensial.</p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm border-0">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100 shadow-sm">
                 <img src="assets/images/computer.png" class="card-img-top" alt="Gambar Komputer">
                 <div class="card-body text-center">
-                    <i class="bi bi-pc-display fs-2"></i>
-                    <h5 class="fw-bold mt-2">Teknologi & Komputer</h5>
-                    <p>Pengadaan komputer, accessories, dan jaringan IT.</p>
+                    <i class="bi bi-pc-display fs-1"></i>
+                    <h5 class="fw-bold mt-3">Teknologi & Komputer</h5>
+                    <p class="text-muted">Pengadaan perangkat komputer, aksesoris, serta solusi jaringan IT.</p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm border-0">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card h-100 shadow-sm">
                 <img src="assets/images/construction.png" class="card-img-top" alt="Gambar Konstruksi">
                 <div class="card-body text-center">
-                    <i class="bi bi-building fs-2"></i>
-                    <h5 class="fw-bold mt-2">Jasa Konstruksi</h5>
-                    <p>General maintenance & pekerjaan konstruksi.</p>
+                    <i class="bi bi-building fs-1"></i>
+                    <h5 class="fw-bold mt-3">Jasa Konstruksi</h5>
+                    <p class="text-muted">Layanan general maintenance dan pekerjaan konstruksi berkualitas.</p>
                 </div>
             </div>
         </div>
@@ -101,19 +352,21 @@
     </div>
 </section>
 
-<section class="container py-5 bg-light reveal">
-    <h3 class="section-title text-center">Toko Resmi Kami</h3>
+<section id="siplah-store" class="container py-5">
+    <h3 class="section-title text-center" data-aos="fade-up">Toko Resmi Kami</h3>
     
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-lg border-0 text-center p-4">
+        <div class="col-md-8 col-lg-7" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card siplah-card text-center p-4 p-md-5">
                 <div class="card-body">
-                    <i class="bi bi-cart-fill display-4 text-primary mb-3"></i> 
-                    <h5 class="fw-bold">CV Nauli Sarana Mandiri di SIPLAH</h5>
-                    <p class="text-muted">
-                        Layanan pengadaan resmi untuk sekolah. Temukan produk ATK, Komputer, dan Jasa kami di platform SIPLAH.
+                    <i class="bi bi-cart-fill display-2 mb-4"></i> 
+                    <h4 class="fw-bold mb-3">CV Nauli Sarana Mandiri di SIPLAH</h4>
+                    <p class="lead text-light mb-4">
+                        Kami bangga menjadi penyedia resmi di platform SIPLAH.
+                        Temukan beragam produk ATK, Komputer, dan Jasa Konstruksi kami
+                        yang terpercaya untuk kebutuhan pengadaan sekolah Anda.
                     </p>
-                    <a href="https://siplah.blibli.com/" target="_blank" class="btn btn-primary btn-lg mt-3">
+                    <a href="https://siplah.blibli.com/" target="_blank" class="btn btn-lg mt-3">
                         Kunjungi Toko SIPLAH
                         <i class="bi bi-box-arrow-up-right ms-2"></i>
                     </a>
@@ -123,86 +376,92 @@
     </div>
 </section>
 
-<section class="container py-5 reveal">
-    <h3 class="section-title">Visi & Misi</h3>
+<section id="vision-mission" class="container py-5 bg-light-gradient">
+    <h3 class="section-title text-center" data-aos="fade-up">Visi & Misi</h3>
 
-    <div class="card shadow-sm border-0">
-        <div class="card-body">
-            <h5 class="fw-bold">Visi</h5>
-            <p>Menjadi mitra terpercaya dalam pengadaan perkantoran, teknologi, serta jasa konstruksi.</p>
-            <h5 class="fw-bold mt-3">Misi</h5>
-            <ul>
-                <li>Layanan cepat, tepat, dan efisien</li>
-                <li>Harga bersaing dengan kualitas terbaik</li>
-                <li>Membangun hubungan jangka panjang dengan pelanggan</li>
-            </ul>
+    <div class="row justify-content-center g-4">
+        <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body p-4 p-md-5">
+                    <h5 class="fw-bold text-primary mb-3"><i class="bi bi-eye-fill me-2"></i> Visi Kami</h5>
+                    <p class="lead mb-0">
+                        Menjadi mitra terdepan dan terpercaya dalam solusi pengadaan perkantoran, teknologi informasi,
+                        dan jasa konstruksi yang inovatif serta berkualitas di Indonesia.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body p-4 p-md-5">
+                    <h5 class="fw-bold text-primary mb-3"><i class="bi bi-check-circle-fill me-2"></i> Misi Kami</h5>
+                    <ul class="list-unstyled lead mb-0">
+                        <li><i class="bi bi-arrow-right-short text-primary me-2"></i> Memberikan layanan yang cepat, tepat, dan efisien.</li>
+                        <li><i class="bi bi-arrow-right-short text-primary me-2"></i> Menyediakan produk berkualitas terbaik dengan harga yang kompetitif.</li>
+                        <li><i class="bi bi-arrow-right-short text-primary me-2"></i> Membangun dan menjaga hubungan kerja sama jangka panjang yang saling menguntungkan dengan pelanggan dan mitra.</li>
+                        <li><i class="bi bi-arrow-right-short text-primary me-2"></i> Mengembangkan inovasi dalam setiap bidang usaha untuk kepuasan pelanggan.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="container py-5 reveal" id="contact">
-    <h3 class="section-title">Kontak Perusahaan</h3>
+<section id="contact" class="container py-5">
+    <h3 class="section-title text-center" data-aos="fade-up">Kontak Perusahaan</h3>
 
-    <div class="card shadow-sm border-0">
-        <div class="card-body">
-            <p><i class="bi bi-geo-alt-fill text-danger"></i> <strong>Lokasi:</strong> Martubung - Kota Medan, Sumatera Utara</p>
-            <p><i class="bi bi-telephone-fill text-success"></i> <strong>Telepon/WA:</strong> 0812-3456-7890</p>
-            <p><i class="bi bi-envelope-fill text-primary"></i> <strong>Email:</strong> naulisaranamandiri@gmail.com</p>
-
-            <a href="https://wa.me/6281234567890" class="btn btn-success mt-2">
-                <i class="bi bi-whatsapp"></i> Hubungi via WhatsApp
-            </a>
+    <div class="row justify-content-center">
+        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="card shadow-lg border-0 p-4 p-md-5">
+                <div class="card-body text-center">
+                    <p class="lead mb-4">Jangan ragu untuk menghubungi kami untuk pertanyaan atau penawaran kerja sama.</p>
+                    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mb-4">
+                        <p class="mb-0 fs-5"><i class="bi bi-geo-alt-fill text-danger me-2"></i> <strong>Lokasi:</strong> Martubung - Kota Medan, Sumatera Utara</p>
+                        <p class="mb-0 fs-5"><i class="bi bi-telephone-fill text-success me-2"></i> <strong>Telepon/WA:</strong> <a href="tel:+6281234567890" class="text-decoration-none text-success">0812-3456-7890</a></p>
+                        <p class="mb-0 fs-5"><i class="bi bi-envelope-fill text-primary me-2"></i> <strong>Email:</strong> <a href="mailto:naulisaranamandiri@gmail.com" class="text-decoration-none text-primary">naulisaranamandiri@gmail.com</a></p>
+                    </div>
+                    
+                    <a href="https://wa.me/6281234567890?text=Halo%20CV%20Nauli%20Sarana%20Mandiri,%20saya%20ingin%20bertanya%20tentang..." target="_blank" class="btn btn-success btn-lg mt-3">
+                        <i class="bi bi-whatsapp me-2"></i> Hubungi Kami via WhatsApp
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<footer class="text-center p-3 bg-light mt-5">
-    © 2025 CV Nauli Sarana Mandiri | All Rights Reserved
+<footer class="text-center">
+    <div class="container">
+        <p class="mb-0">© 2025 CV Nauli Sarana Mandiri | All Rights Reserved</p>
+    </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script>
-    // FUNGSI UTAMA UNTUK MENAMBAH DINAMIKA (Scroll Reveal)
-    function revealElements() {
-        const reveals = document.querySelectorAll(".reveal");
-        
-        // Loop melalui setiap elemen yang memiliki class 'reveal'
-        for (let i = 0; i < reveals.length; i++) {
-            const windowHeight = window.innerHeight;
-            // Ambil jarak elemen dari bagian atas viewport
-            const revealTop = reveals[i].getBoundingClientRect().top;
-            
-            // Tentukan titik trigger (misalnya, 150px dari bawah viewport)
-            const revealPoint = 150;
-
-            // Jika elemen masuk ke dalam area pandang
-            if (revealTop < windowHeight - revealPoint) {
-                // Tambahkan class 'active' untuk memicu transisi CSS
-                reveals[i].classList.add("active");
-            } 
-            // Opsional: Untuk menghilangkan efek saat di-scroll ke atas lagi
-            /*
-            else {
-                reveals[i].classList.remove("active");
-            }
-            */
-        }
-    }
-
-    // Panggil fungsi saat DOM dimuat
+    // Inisialisasi AOS (Animate On Scroll)
     document.addEventListener('DOMContentLoaded', () => {
-        // 1. Fade-in Halaman Penuh
-        document.body.style.opacity = 1;
-        
-        // 2. Panggil fungsi reveal saat DOM siap (untuk elemen yang sudah terlihat)
-        revealElements(); 
-    });
+        AOS.init({
+            duration: 800, // Durasi animasi
+            once: true,    // Hanya animasikan sekali saat di-scroll
+            mirror: false  // Jangan ulangi animasi saat di-scroll ke atas
+        });
 
-    // Panggil fungsi reveal setiap kali pengguna melakukan scroll
-    window.addEventListener("scroll", revealElements);
+        // Fade-in Halaman Penuh
+        document.body.style.opacity = 1;
+
+        // Smooth scroll untuk navigasi
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
 </script>
 
 </body>
 </html>
-
